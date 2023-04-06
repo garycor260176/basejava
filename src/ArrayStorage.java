@@ -14,7 +14,7 @@ public class ArrayStorage {
         numberResumes = 0;
     }
 
-    int findResume(String uuid) {
+    private int findResume(String uuid) {
         for (int i = 0; i < numberResumes; i++)
             if (uuid.equals(storage[i].uuid)) return i;
         return -1;
