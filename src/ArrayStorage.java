@@ -21,7 +21,7 @@ public class ArrayStorage {
     }
 
     void save(Resume resume) {
-        if (findResume(resume.uuid) >= 0) return;
+        if (numberResumes == 10000 || findResume(resume.uuid) >= 0) return;
         storage[numberResumes++] = resume;
     }
 
@@ -34,8 +34,7 @@ public class ArrayStorage {
         int idx = findResume(uuid);
         if (idx < 0) return;
 
-        numberResumes--;
-        System.arraycopy(storage, idx + 1, storage, idx, numberResumes - idx);
+        System.arraycopy(storage, idx + 1, storage, idx, (--numberResumes) - idx);
         storage[numberResumes] = null;
     }
 
