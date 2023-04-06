@@ -14,24 +14,29 @@ public class ArrayStorage {
         numberResumes = 0;
     }
 
+    int findResume(String uuid) {
+        for (int i = 0; i < numberResumes; i++)
+            if (uuid.equals(storage[i].uuid)) return i;
+        return -1;
+    }
+
     void save(Resume resume) {
+        if (findResume(resume.uuid) >= 0) return;
         storage[numberResumes++] = resume;
     }
 
     Resume get(String uuid) {
-        for (int i = 0; i < numberResumes; i++)
-            if (uuid.equals(storage[i].uuid)) return storage[i];
-        return null;
+        int idx = findResume(uuid);
+        return (idx >= 0 ? storage[idx] : null);
     }
 
     void delete(String uuid) {
-        for (int i = 0; i < numberResumes; i++)
-            if (uuid.equals(storage[i].uuid)) {
-                numberResumes--;
-                System.arraycopy(storage, i + 1, storage, i, numberResumes - i);
-                storage[numberResumes] = null;
-                break;
-            }
+        int idx = findResume(uuid);
+        if (idx < 0) return;
+
+        numberResumes--;
+        System.arraycopy(storage, idx + 1, storage, idx, numberResumes - idx);
+        storage[numberResumes] = null;
     }
 
     /**
