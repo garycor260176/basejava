@@ -34,7 +34,8 @@ public class ArrayStorage {
         int idx = findResume(uuid);
         if (idx < 0) return;
 
-        System.arraycopy(storage, idx + 1, storage, idx, (--numberResumes) - idx);
+        numberResumes--;
+        System.arraycopy(storage, idx + 1, storage, idx, numberResumes - idx);
         storage[numberResumes] = null;
     }
 
