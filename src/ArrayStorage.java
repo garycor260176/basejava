@@ -14,20 +14,14 @@ public class ArrayStorage {
         numberResumes = 0;
     }
 
-    private int findResume(String uuid) {
-        for (int i = 0; i < numberResumes; i++)
-            if (uuid.equals(storage[i].uuid)) return i;
-        return -1;
-    }
-
     void save(Resume resume) {
-        if (numberResumes == 10000 || findResume(resume.uuid) >= 0) return;
+        if (numberResumes >= storage.length || findResume(resume.uuid) >= 0) return;
         storage[numberResumes++] = resume;
     }
 
     Resume get(String uuid) {
         int idx = findResume(uuid);
-        return (idx >= 0 ? storage[idx] : null);
+        return (idx < 0 ? null : storage[idx]);
     }
 
     void delete(String uuid) {
@@ -48,5 +42,11 @@ public class ArrayStorage {
 
     int size() {
         return numberResumes;
+    }
+
+    private int findResume(String uuid) {
+        for (int i = 0; i < numberResumes; i++)
+            if (uuid.equals(storage[i].uuid)) return i;
+        return -1;
     }
 }
