@@ -1,5 +1,4 @@
 package com.urise.webapp.storage;
-
 /*
  * Array based storage for Resumes
  */
