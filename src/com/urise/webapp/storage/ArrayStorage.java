@@ -8,9 +8,10 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 
 public class ArrayStorage {
+    private static final int STORAGE_LIMIT = 10000;
     private int size;
 
-    Resume[] storage = new Resume[10000];
+    protected final Resume[] storage = new Resume[STORAGE_LIMIT];
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
@@ -20,38 +21,39 @@ public class ArrayStorage {
     public void save(Resume resume) {
         if (size >= storage.length) {
             System.out.println("The maximum number of resumes has been reached. Cannot add.");
-            return;
-        }
-        if (findResume(resume.getUuid()) >= 0) {
+        } else if(findIndex(resume.getUuid()) >= 0) {
             System.out.println("Resume " + resume.getUuid() + " already exists.");
-            return;
+        } else {
+            storage[size++] = resume;
         }
-        storage[size++] = resume;
     }
 
     public void update(Resume resume) {
-        int idx = findResume(resume.getUuid());
-        if (idx < 0) {
+        int index = findIndex(resume.getUuid());
+        if (index < 0) {
             System.out.println("Resume " + resume.getUuid() + " not found.");
             return;
         }
-        storage[idx] = resume;
+        storage[index] = resume;
     }
 
     public Resume get(String uuid) {
-        int idx = findResume(uuid);
-        if (idx < 0) System.out.println("Resume " + uuid + " not found.");
-        return (idx < 0 ? null : storage[idx]);
+        int index = findIndex(uuid);
+        if (index < 0) {
+            System.out.println("Resume " + uuid + " not found.");
+            return null;
+        }
+        return storage[index];
     }
 
     public void delete(String uuid) {
-        int idx = findResume(uuid);
-        if (idx < 0) {
+        int index = findIndex(uuid);
+        if (index < 0) {
             System.out.println("Resume " + uuid + " not found.");
             return;
         }
         size--;
-        System.arraycopy(storage, idx + 1, storage, idx, size - idx);
+        storage[index] = storage[size];
         storage[size] = null;
     }
 
@@ -66,9 +68,12 @@ public class ArrayStorage {
         return size;
     }
 
-    private int findResume(String uuid) {
-        for (int i = 0; i < size; i++)
-            if (uuid.equals(storage[i].getUuid())) return i;
+    private int findIndex(String uuid) {
+        for (int i = 0; i < size; i++) {
+            if (uuid.equals(storage[i].getUuid())) {
+                return i;
+            }
+        }
         return -1;
     }
 }
