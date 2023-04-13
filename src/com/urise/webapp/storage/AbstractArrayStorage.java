@@ -21,15 +21,18 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         if (size >= storage.length) {
             System.out.println("The maximum number of resumes has been reached. Cannot add.");
-        } else if (findIndex(resume.getUuid()) >= 0) {
-            System.out.println("Resume " + resume.getUuid() + " already exists.");
         } else {
-            InsertResume(resume);
-            size++;
+            int index = findIndex(resume.getUuid());
+            if (index >= 0) {
+                System.out.println("Resume " + resume.getUuid() + " already exists.");
+            } else {
+                InsertResume(resume, index);
+                size++;
+            }
         }
     }
 
-    protected abstract void InsertResume(Resume resume);
+    protected abstract void InsertResume(Resume resume, int index);
 
     public void update(Resume resume) {
         int index = findIndex(resume.getUuid());

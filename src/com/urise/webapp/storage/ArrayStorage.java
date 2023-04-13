@@ -6,7 +6,7 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
-    protected void InsertResume(Resume resume) {
+    protected void InsertResume(Resume resume, int index) {
         storage[size] = resume;
     }
 

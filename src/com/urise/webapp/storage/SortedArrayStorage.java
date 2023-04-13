@@ -8,10 +8,9 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-    protected void InsertResume(Resume resume) {
-        int insertIndex = -findIndex(resume.getUuid()) - 1;
-        System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
-        storage[insertIndex] = resume;
+    protected void InsertResume(Resume resume, int index) {
+        System.arraycopy(storage, index, storage, index + 1, size - index);
+        storage[index] = resume;
     }
 
     protected void doAfterDelete(int index) {
