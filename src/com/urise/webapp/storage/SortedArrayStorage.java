@@ -14,7 +14,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         storage[insertIndex] = resume;
     }
 
-    protected void doAfterDelete(int index) {
+    protected void deleleteByIndex(int index) {
         System.arraycopy(storage, index + 1, storage, index, size - index - 1);
     }
 

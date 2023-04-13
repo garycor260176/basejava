@@ -10,7 +10,7 @@ public class ArrayStorage extends AbstractArrayStorage {
         storage[size] = resume;
     }
 
-    protected void doAfterDelete(int index) {
+    protected void deleleteByIndex(int index) {
         storage[index] = storage[size - 1];
     }
 

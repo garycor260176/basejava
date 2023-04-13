@@ -58,12 +58,12 @@ public abstract class AbstractArrayStorage implements Storage {
             System.out.println("Resume " + uuid + " not found.");
             return;
         }
-        doAfterDelete(index);
+        deleleteByIndex(index);
         size--;
         storage[size] = null;
     }
 
-    protected abstract void doAfterDelete(int index);
+    protected abstract void deleleteByIndex(int index);
 
     /**
      * @return array, contains only Resumes in storage (without null)
