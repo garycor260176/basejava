@@ -9,8 +9,9 @@ import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
     protected void InsertResume(Resume resume, int index) {
-        System.arraycopy(storage, index, storage, index + 1, size - index);
-        storage[index] = resume;
+        int insertIndex = -index - 1;
+        System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
+        storage[insertIndex] = resume;
     }
 
     protected void doAfterDelete(int index) {
