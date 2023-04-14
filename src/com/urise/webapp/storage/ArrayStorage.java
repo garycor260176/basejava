@@ -6,11 +6,11 @@ package com.urise.webapp.storage;
 import com.urise.webapp.model.Resume;
 
 public class ArrayStorage extends AbstractArrayStorage {
-    protected void InsertResume(Resume resume, int index) {
+    protected void camelCase(Resume resume, int index) {
         storage[size] = resume;
     }
 
-    protected void deleleteByIndex(int index) {
+    protected void deleteByIndex(int index) {
         storage[index] = storage[size - 1];
     }
 
