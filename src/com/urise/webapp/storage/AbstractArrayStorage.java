@@ -18,7 +18,7 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
-    public void save(Resume resume) {
+    final public void save(Resume resume) {
         if (size >= storage.length) {
             System.out.println("The maximum number of resumes has been reached. Cannot add.");
         } else {
@@ -34,7 +34,7 @@ public abstract class AbstractArrayStorage implements Storage {
 
     protected abstract void camelCase(Resume resume, int index);
 
-    public void update(Resume resume) {
+    final public void update(Resume resume) {
         int index = findIndex(resume.getUuid());
         if (index < 0) {
             System.out.println("Resume " + resume.getUuid() + " not found.");
@@ -43,7 +43,7 @@ public abstract class AbstractArrayStorage implements Storage {
         storage[index] = resume;
     }
 
-    public Resume get(String uuid) {
+    final public Resume get(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
             System.out.println("Resume " + uuid + " not found.");
@@ -52,7 +52,7 @@ public abstract class AbstractArrayStorage implements Storage {
         return storage[index];
     }
 
-    public void delete(String uuid) {
+    final public void delete(String uuid) {
         int index = findIndex(uuid);
         if (index < 0) {
             System.out.println("Resume " + uuid + " not found.");
