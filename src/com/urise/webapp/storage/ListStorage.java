@@ -53,7 +53,6 @@ public class ListStorage extends AbstractStorage<Integer> {
         list.clear();
     }
 
-    @Override
     public int size() {
         return list.size();
     }

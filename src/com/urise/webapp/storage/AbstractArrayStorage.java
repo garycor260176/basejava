@@ -20,7 +20,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         size = 0;
     }
 
-    @Override
     public int size() {
         return size;
     }
