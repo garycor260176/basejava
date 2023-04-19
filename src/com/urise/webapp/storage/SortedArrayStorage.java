@@ -8,17 +8,17 @@ import com.urise.webapp.model.Resume;
 import java.util.Arrays;
 
 public class SortedArrayStorage extends AbstractArrayStorage {
-    protected void camelCase(Resume resume, int index) {
+    protected void camelCase(Resume resume, Integer index) {
         int insertIndex = -index - 1;
         System.arraycopy(storage, insertIndex, storage, insertIndex + 1, size - insertIndex);
         storage[insertIndex] = resume;
     }
 
-    protected void deleteByIndex(int index) {
+    protected void deleteByIndex(Integer index) {
         System.arraycopy(storage, index + 1, storage, index, size - index - 1);
     }
 
-    protected int findIndex(String uuid) {
+    protected Integer findIndex(String uuid) {
         Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }

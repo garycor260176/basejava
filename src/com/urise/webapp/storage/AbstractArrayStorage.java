@@ -4,24 +4,34 @@ package com.urise.webapp.storage;
  */
 
 import com.urise.webapp.exception.ExistStorageException;
-import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.exception.StorageException;
 import com.urise.webapp.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
-public abstract class AbstractArrayStorage implements Storage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected static final int STORAGE_LIMIT = 10000;
-    protected int size;
-
     protected final Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected int size;
 
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    final public void save(Resume resume) {
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    protected boolean isExist(Integer key) {
+        return key >= 0;
+    }
+
+    @Override
+    protected void doSave(Resume resume, Integer key) {
         if (size >= storage.length) {
             throw new StorageException("The maximum number of resumes has been reached. Cannot add.", resume.getUuid());
         } else {
@@ -35,46 +45,33 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    protected abstract void camelCase(Resume resume, int index);
-
-    final public void update(Resume resume) {
-        int index = findIndex(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        }
-        storage[index] = resume;
+    @Override
+    protected void doUpdate(Resume resume, Integer key) {
+        storage[key] = resume;
     }
 
-    final public Resume get(String uuid) {
-        int index = findIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return storage[index];
+    @Override
+    protected Resume doGet(Integer key) {
+        return storage[key];
     }
 
-    final public void delete(String uuid) {
-        int index = findIndex(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        deleteByIndex(index);
+    @Override
+    protected void doDelete(Integer key) {
+        deleteByIndex(key);
+        storage[size - 1] = null;
         size--;
-        storage[size] = null;
     }
 
-    protected abstract void deleteByIndex(int index);
-
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
+    @Override
+    protected List<Resume> doGetAll() {
+        return Arrays.asList(Arrays.copyOf(storage, size));
     }
 
-    public int size() {
-        return size;
-    }
+    @Override
+    protected abstract Integer findIndex(String uuid);
 
-    protected abstract int findIndex(String uuid);
+    protected abstract void deleteByIndex(Integer index);
+
+    protected abstract void camelCase(Resume resume, Integer index);
+
 }

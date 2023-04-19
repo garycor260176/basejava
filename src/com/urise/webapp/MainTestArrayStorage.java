@@ -1,5 +1,6 @@
 package com.urise.webapp;
 
+import com.urise.webapp.exception.NotExistStorageException;
 import com.urise.webapp.model.Resume;
 import com.urise.webapp.storage.SortedArrayStorage;
 import com.urise.webapp.storage.Storage;
@@ -21,7 +22,11 @@ public class MainTestArrayStorage {
 
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
-        System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
+        try {
+            System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
+        } catch (NotExistStorageException e) {
+            System.out.println(e.toString());
+        }
 
         printAll();
         ARRAY_STORAGE.delete(r2.getUuid());
@@ -29,7 +34,11 @@ public class MainTestArrayStorage {
 
         Resume rUpdate = new Resume("uuid9");
         System.out.println("\nUpdate resume " + rUpdate.getUuid());
-        ARRAY_STORAGE.update(rUpdate);
+        try {
+            ARRAY_STORAGE.update(rUpdate);
+        } catch (NotExistStorageException e) {
+            System.out.println(e.toString());
+        }
         printAll();
 
         ARRAY_STORAGE.clear();
