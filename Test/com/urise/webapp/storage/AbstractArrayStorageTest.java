@@ -102,7 +102,8 @@ public class AbstractArrayStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        Resume actual[] = new Resume[]{ RESUME_1, RESUME_2, RESUME_3 };
+        Resume[] actual = new Resume[]{RESUME_1, RESUME_2, RESUME_3};
+        assertSize(3);
         Assert.assertArrayEquals(actual, storage.getAll());
     }
 
