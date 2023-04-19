@@ -43,6 +43,7 @@ public class AbstractArrayStorageTest {
     public void save() throws Exception {
         storage.save(RESUME_4);
         assertGet(RESUME_4);
+        assertSize(4);
     }
 
     @Test(expected = ExistStorageException.class)
