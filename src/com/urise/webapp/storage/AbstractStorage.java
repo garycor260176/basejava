@@ -6,25 +6,25 @@ import com.urise.webapp.model.Resume;
 
 import java.util.List;
 
-public abstract class AbstractStorage<K> implements Storage {
+public abstract class AbstractStorage<T> implements Storage {
     @Override
     public void save(Resume resume) {
-        K key = getNotExistKey(resume.getUuid());
+        T key = getNotExistKey(resume.getUuid());
         doSave(resume, key);
     }
 
     public void update(Resume resume) {
-        K key = getExistKey(resume.getUuid());
+        T key = getExistKey(resume.getUuid());
         doUpdate(resume, key);
     }
 
     public Resume get(String uuid) {
-        K key = getExistKey(uuid);
+        T key = getExistKey(uuid);
         return doGet(key);
     }
 
     public void delete(String uuid) {
-        K key = getExistKey(uuid);
+        T key = getExistKey(uuid);
         doDelete(key);
     }
 
@@ -33,33 +33,33 @@ public abstract class AbstractStorage<K> implements Storage {
         return list;
     }
 
-    private K getNotExistKey(String uuid) {
-        K key = findIndex(uuid);
+    private T getNotExistKey(String uuid) {
+        T key = findIndex(uuid);
         if (isExist(key)) {
             throw new ExistStorageException(uuid);
         }
         return key;
     }
 
-    private K getExistKey(String uuid) {
-        K key = findIndex(uuid);
+    private T getExistKey(String uuid) {
+        T key = findIndex(uuid);
         if (!isExist(key)) {
             throw new NotExistStorageException(uuid);
         }
         return key;
     }
 
-    protected abstract K findIndex(String uuid);
+    protected abstract T findIndex(String uuid);
 
-    protected abstract boolean isExist(K key);
+    protected abstract boolean isExist(T key);
 
-    protected abstract void doSave(Resume resume, K key);
+    protected abstract void doSave(Resume resume, T key);
 
-    protected abstract void doUpdate(Resume resume, K key);
+    protected abstract void doUpdate(Resume resume, T key);
 
-    protected abstract Resume doGet(K key);
+    protected abstract Resume doGet(T key);
 
-    protected abstract void doDelete(K key);
+    protected abstract void doDelete(T key);
 
     protected abstract List<Resume> doGetAll();
 }
