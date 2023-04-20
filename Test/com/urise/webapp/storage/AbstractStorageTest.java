@@ -7,6 +7,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class AbstractStorageTest {
     protected final Storage storage;
     private static final String UUID_1 = "uuid1";
@@ -89,9 +93,10 @@ public class AbstractStorageTest {
 
     @Test
     public void getAll() throws Exception {
-        Resume[] actual = new Resume[]{RESUME_1, RESUME_2, RESUME_3};
         assertSize(3);
-        Assert.assertArrayEquals(actual, storage.getAll().toArray());
+        List<Resume> list = storage.getAll();
+        Collections.sort(list);
+        Assert.assertEquals(Arrays.asList(RESUME_1, RESUME_2, RESUME_3), list);
     }
 
     @Test
