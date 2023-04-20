@@ -34,7 +34,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
         if (size >= storage.length) {
             throw new StorageException("The maximum number of resumes has been reached. Cannot add.", resume.getUuid());
         } else {
-            int index = findIndex(resume.getUuid());
+            int index = getSearchKey(resume.getUuid());
             if (index >= 0) {
                 throw new ExistStorageException(resume.getUuid());
             } else {
@@ -67,7 +67,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected abstract Integer findIndex(String uuid);
+    protected abstract Integer getSearchKey(String uuid);
 
     protected abstract void deleteByIndex(Integer index);
 
