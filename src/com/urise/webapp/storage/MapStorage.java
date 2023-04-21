@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MapStorage extends AbstractStorage<Resume> {
-    private final Map<String, Resume> map = new HashMap<>();
+    private final Map<String, Resume> storage = new HashMap<>();
 
     @Override
     protected Resume getSearchKey(String uuid) {
-        return map.get(uuid);
+        return storage.get(uuid);
     }
 
     @Override
@@ -22,12 +22,12 @@ public class MapStorage extends AbstractStorage<Resume> {
 
     @Override
     protected void doSave(Resume resume, Resume key) {
-        map.put(resume.getUuid(), resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
     protected void doUpdate(Resume resume, Resume key) {
-        map.put(resume.getUuid(), resume);
+        storage.put(resume.getUuid(), resume);
     }
 
     @Override
@@ -37,21 +37,21 @@ public class MapStorage extends AbstractStorage<Resume> {
 
     @Override
     protected void doDelete(Resume key) {
-        map.remove(key.getUuid());
+        storage.remove(key.getUuid());
     }
 
     @Override
     protected List<Resume> doGetAll() {
-        return new ArrayList<>(map.values());
+        return new ArrayList<>(storage.values());
     }
 
     @Override
     public void clear() {
-        map.clear();
+        storage.clear();
     }
 
     @Override
     public int size() {
-        return map.size();
+        return storage.size();
     }
 }
