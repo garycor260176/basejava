@@ -1,8 +1,8 @@
 package com.urise.webapp.storage;
 
-public class MapStorageTest extends AbstractStorageTest {
+public class MapUuidStorageTest extends AbstractStorageTest {
 
-    public MapStorageTest() {
-        super(new MapStorage());
+    public MapUuidStorageTest() {
+        super(new MapUuidStorage());
     }
 }

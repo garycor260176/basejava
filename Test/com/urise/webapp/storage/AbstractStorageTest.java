@@ -8,19 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AbstractStorageTest {
     protected final Storage storage;
     private static final String UUID_1 = "uuid1";
-    private static final Resume RESUME_1 = new Resume(UUID_1);
+    private static final Resume RESUME_1 = new Resume(UUID_1, "fullName_1");
     private static final String UUID_2 = "uuid2";
-    private static final Resume RESUME_2 = new Resume(UUID_2);
+    private static final Resume RESUME_2 = new Resume(UUID_2, "fullName_2");
     private static final String UUID_3 = "uuid3";
-    private static final Resume RESUME_3 = new Resume(UUID_3);
+    private static final Resume RESUME_3 = new Resume(UUID_3, "fullName_3");
     private static final String UUID_4 = "uuid4";
-    private static final Resume RESUME_4 = new Resume(UUID_4);
+    private static final Resume RESUME_4 = new Resume(UUID_4, "fullName_4");
     private static final String UUID_NOT_EXIST = "dummy";
 
     public AbstractStorageTest(Storage storage) {
@@ -39,7 +38,7 @@ public class AbstractStorageTest {
     public void clear() throws Exception {
         storage.clear();
         assertSize(0);
-        Assert.assertArrayEquals(new Resume[0], storage.getAll().toArray());
+        Assert.assertArrayEquals(new Resume[0], storage.getAllSorted().toArray());
     }
 
     @Test
@@ -51,20 +50,19 @@ public class AbstractStorageTest {
 
     @Test(expected = ExistStorageException.class)
     public void saveExist() throws Exception {
-        storage.save(new Resume(UUID_1));
+        storage.save(RESUME_2);
     }
 
     @Test
     public void update() throws Exception {
-        Resume resume = new Resume(UUID_2);
+        Resume resume = new Resume(UUID_2, "rename_2");
         storage.update(resume);
         Assert.assertSame(storage.get(UUID_2), resume);
     }
 
     @Test(expected = NotExistStorageException.class)
     public void updateNotExist() throws Exception {
-        Resume resume = new Resume(UUID_NOT_EXIST);
-        storage.update(resume);
+        storage.update(RESUME_4);
     }
 
     @Test
@@ -94,8 +92,7 @@ public class AbstractStorageTest {
     @Test
     public void getAll() throws Exception {
         assertSize(3);
-        List<Resume> list = storage.getAll();
-        Collections.sort(list);
+        List<Resume> list = storage.getAllSorted();
         Assert.assertEquals(Arrays.asList(RESUME_1, RESUME_2, RESUME_3), list);
     }
 
