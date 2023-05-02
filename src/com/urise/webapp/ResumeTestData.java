@@ -12,7 +12,8 @@ public class ResumeTestData {
 
         addContact(resume);
         addTextSections(resume);
-        addListSections(resume);
+        addListAchievements(resume);
+        addListQualifications(resume);
         addOrganizationSections(resume);
         addEducationSections(resume);
 
@@ -184,9 +185,8 @@ public class ResumeTestData {
         resume.addSection(SectionType.EDUCATION, new OrganizationSection(educationSections));
     }
 
-    private static void addListSections(Resume resume) {
+    private static void addListAchievements(Resume resume) {
         List<String> achievements = new ArrayList<>();
-        List<String> qualifications = new ArrayList<>();
 
         achievements.add("Организация команды и успешная реализация Java проектов для сторонних заказчиков: " +
                 "приложения автопарк на стеке Spring Cloud/микросервисы, система мониторинга показателей спортсменов "
@@ -211,6 +211,12 @@ public class ResumeTestData {
         achievements.add("Реализация протоколов по приему платежей всех основных платежных системы России (Cyberplat,"
                 + " Eport, Chronopay, Сбербанк), Белоруcсии(Erip, Osmp) и Никарагуа.");
 
+        resume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
+    }
+
+    private static void addListQualifications(Resume resume) {
+        List<String> qualifications = new ArrayList<>();
+
         qualifications.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
         qualifications.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
         qualifications.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, " +
@@ -233,7 +239,6 @@ public class ResumeTestData {
                 "архитектурных шаблонов, UML, функционального программирования");
         qualifications.add("Родной русский, английский \"upper intermediate\"");
 
-        resume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
         resume.addSection(SectionType.QUALIFICATIONS, new ListSection(qualifications));
     }
 
