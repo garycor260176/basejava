@@ -12,8 +12,8 @@ public class ResumeTestData {
 
         addContact(resume);
         addTextSections(resume);
-        addListAchievements(resume);
-        addListQualifications(resume);
+        addAchievements(resume);
+        addQualifications(resume);
         addOrganizationSections(resume);
         addEducationSections(resume);
 
@@ -185,7 +185,7 @@ public class ResumeTestData {
         resume.addSection(SectionType.EDUCATION, new OrganizationSection(educationSections));
     }
 
-    private static void addListAchievements(Resume resume) {
+    private static void addAchievements(Resume resume) {
         List<String> achievements = new ArrayList<>();
 
         achievements.add("Организация команды и успешная реализация Java проектов для сторонних заказчиков: " +
@@ -214,7 +214,7 @@ public class ResumeTestData {
         resume.addSection(SectionType.ACHIEVEMENT, new ListSection(achievements));
     }
 
-    private static void addListQualifications(Resume resume) {
+    private static void addQualifications(Resume resume) {
         List<String> qualifications = new ArrayList<>();
 
         qualifications.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
