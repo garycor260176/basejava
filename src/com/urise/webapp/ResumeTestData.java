@@ -28,6 +28,17 @@ public class ResumeTestData {
 
     }
 
+    public static Resume createResume(String uuid, String fullName) {
+        Resume resume = new Resume(uuid, fullName);
+        addContact(resume);
+        addTextSections(resume);
+        addAchievements(resume);
+        addQualifications(resume);
+        addOrganizationSections(resume);
+        addEducationSections(resume);
+        return resume;
+    }
+
     private static void addTextSections(Resume resume) {
         resume.addSection(SectionType.OBJECTIVE,
                 new TextSection("Ведущий стажировок и корпоративного обучения по " + "Java Web и Enterprise " +
