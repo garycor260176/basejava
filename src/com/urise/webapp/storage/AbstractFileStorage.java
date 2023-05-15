@@ -37,20 +37,28 @@ public abstract class AbstractFileStorage extends AbstractStorage<File>{
     protected void doSave(Resume resume, File key) {
         try {
             key.createNewFile();
+            doWrite(resume, key);
         } catch (IOException e) {
             throw new StorageException("IO error", key.getName(), e);
         }
-        doUpdate(resume, key);
     }
 
     @Override
     protected void doUpdate(Resume resume, File key) {
-
+        try {
+            doWrite(resume, key);
+        } catch (IOException e) {
+            throw new StorageException("IO error", key.getName(), e);
+        }
     }
 
     @Override
     protected Resume doGet(File key) {
-        return null;
+        try {
+            return doRead(key);
+        } catch (IOException e) {
+            throw new StorageException("IO error", key.getName(), e);
+        }
     }
 
     @Override
@@ -91,4 +99,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File>{
         }
         return list;
     }
+
+    protected abstract void doWrite(Resume r, File file) throws IOException;
+    protected abstract Resume doRead(File file) throws IOException;
 }
