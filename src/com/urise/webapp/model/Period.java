@@ -1,15 +1,24 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Period {
+import static com.urise.webapp.util.DateUtil.NOW;
+
+public class Period implements Serializable {
+    private static final long serialVersionUID = 1L;
     private LocalDate dateFrom;
     private LocalDate dateTo;
     private String position;
     private String description;
 
     public Period() {
+    }
+
+    public Period(LocalDate dateFrom, String position, String description) {
+        this(dateFrom, NOW, position);
+        this.description = description;
     }
 
     public Period(LocalDate dateFrom, LocalDate dateTo, String position, String description) {

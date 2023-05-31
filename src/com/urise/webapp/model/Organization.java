@@ -1,14 +1,25 @@
 package com.urise.webapp.model;
 
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
-public class Organization {
+public class Organization implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Link website;
     private List<Period> periods;
+
+    public Organization(Link website, Period... periods) {
+        this(website, Arrays.asList(periods));
+    }
 
     public Organization(Link website, List<Period> periods) {
         this.website = website;
         this.periods = periods;
+    }
+
+    public Organization(String name, String url, Period... periods) {
+        this(name, url, Arrays.asList(periods));
     }
 
     public Organization(String name, String url, List<Period> periods) {
