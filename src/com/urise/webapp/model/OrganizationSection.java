@@ -22,6 +22,10 @@ public class OrganizationSection extends Section {
         return items;
     }
 
+    public List<Organization> getOrganizations() {
+        return items;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

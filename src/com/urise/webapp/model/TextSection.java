@@ -26,7 +26,6 @@ public class TextSection extends Section {
         if (o == null || getClass() != o.getClass()) return false;
 
         TextSection that = (TextSection) o;
-
         return content.equals(that.content);
     }
 
