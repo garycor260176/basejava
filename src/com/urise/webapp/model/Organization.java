@@ -1,9 +1,12 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Organization implements Serializable {
     private static final long serialVersionUID = 1L;
     private Link website;
@@ -46,7 +49,9 @@ public class Organization implements Serializable {
         Organization that = (Organization) o;
 
         if (!website.equals(that.website)) return false;
-        return periods.equals(that.periods);
+
+        boolean f = periods.equals(that.periods);
+        return f;
     }
 
     @Override

@@ -1,19 +1,21 @@
 package com.urise.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Initial resume class
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
     private static final long serialVersionUID = 1L;
 
     // Unique identifier
-    private final String uuid;
+    private String uuid;
     private String fullName;
 
     private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
@@ -80,7 +82,8 @@ public class Resume implements Comparable<Resume>, Serializable {
         if (!Objects.equals(fullName, resume.fullName)) return false;
         if (!Objects.equals(uuid, resume.uuid)) return false;
         if (contacts != null ? !contacts.equals(resume.contacts) : resume.contacts != null) return false;
-        return sections != null ? sections.equals(resume.sections) : resume.sections == null;
+        boolean f = sections != null ? sections.equals(resume.sections) : resume.sections == null;
+        return f;
     }
 
     @Override

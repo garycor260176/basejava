@@ -1,14 +1,22 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.LocalDateAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 import static com.urise.webapp.util.DateUtil.NOW;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Period implements Serializable {
     private static final long serialVersionUID = 1L;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateFrom;
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateTo;
     private String position;
     private String description;
@@ -18,21 +26,22 @@ public class Period implements Serializable {
 
     public Period(LocalDate dateFrom, String position, String description) {
         this(dateFrom, NOW, position);
-        this.description = description;
+        setDescription(description);
     }
 
     public Period(LocalDate dateFrom, LocalDate dateTo, String position, String description) {
         this(dateFrom, dateTo, position);
-        this.description = description;
+        setDescription(description);
     }
 
     public Period(LocalDate dateFrom, LocalDate dateTo, String position) {
         Objects.requireNonNull(dateFrom, "dateFrom must not be null");
-        //Objects.requireNonNull(dateTo, "dateTo must not be null");
+        Objects.requireNonNull(dateTo, "dateTo must not be null");
         Objects.requireNonNull(position, "title must not be null");
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.position = position;
+        setDescription("");
     }
 
     public LocalDate getDateFrom() {
@@ -51,6 +60,10 @@ public class Period implements Serializable {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description == null ? "" : description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +74,7 @@ public class Period implements Serializable {
         if (!dateFrom.equals(period.dateFrom)) return false;
         if (!dateTo.equals(period.dateTo)) return false;
         if (!position.equals(period.position)) return false;
-        return Objects.equals(description, period.description);
+        return Objects.equals(getDescription(), period.getDescription());
     }
 
     @Override
