@@ -8,3 +8,4 @@ public class XmlPathStorageTest extends AbstractStorageTest {
         super(new PathStorage(STORAGE_DIR.getAbsolutePath(), new XmlStreamSerializer()));
     }
 }
+

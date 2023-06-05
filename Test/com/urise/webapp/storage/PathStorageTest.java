@@ -8,3 +8,4 @@ public class PathStorageTest extends AbstractStorageTest {
         super(new PathStorage(STORAGE_DIR.getAbsolutePath(), new ObjectStreamSerializer()));
     }
 }
+
