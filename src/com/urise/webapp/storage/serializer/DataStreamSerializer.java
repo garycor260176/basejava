@@ -74,8 +74,7 @@ public class DataStreamSerializer implements StreamSerializer {
             writeLocalDate(dos, period.getDateFrom());
             writeLocalDate(dos, period.getDateTo());
             dos.writeUTF(period.getPosition());
-            String description = period.getDescription();
-            dos.writeUTF((description != null) ? description : "");
+            dos.writeUTF(period.getDescription());
         });
     }
 
