@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StreamArray {
-
     public static void main(String[] args) {
         int[] arr = {5, 2, 3, 3, 2, 3};
         System.out.println(minValue(arr));
 
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 20; i++) {
             list.add(i);
         }
         System.out.println(oddOrEven(list));

@@ -30,8 +30,8 @@ public class Resume implements Comparable<Resume>, Serializable {
     }
 
     public Resume(String uuid, String fullName) {
-        this.uuid = uuid;
-        this.fullName = fullName;
+        this.uuid = uuid.replaceAll("\\s+$", "");
+        this.fullName = fullName.replaceAll("\\s+$", "");
     }
 
     public Map<ContactType, String> getContacts() {
