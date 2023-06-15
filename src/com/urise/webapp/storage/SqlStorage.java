@@ -22,7 +22,13 @@ public class SqlStorage implements Storage {
 
     @Override
     public void clear() {
-        sqlHelper.runSql("DELETE FROM resume");
+        sqlHelper.Execute(conn -> {
+                    try (PreparedStatement ps = conn.prepareStatement("DELETE FROM resume")) {
+                        ps.execute();
+                        return null;
+                    }
+                }
+        );
     }
 
     @Override
@@ -44,8 +50,9 @@ public class SqlStorage implements Storage {
         sqlHelper.Execute(conn -> {
                     try (PreparedStatement ps = conn.prepareStatement(
                             "UPDATE resume SET full_name = ? WHERE uuid =?")) {
+                        String uuid = resume.getUuid();
                         ps.setString(1, resume.getFullName());
-                        ps.setString(2, resume.getUuid());
+                        ps.setString(2, uuid);
                         executeUpdate(ps, resume.getUuid());
                     }
                     return null;
@@ -75,6 +82,7 @@ public class SqlStorage implements Storage {
                     try (PreparedStatement ps = conn.prepareStatement(
                             "DELETE FROM resume WHERE resume.uuid =?")) {
                         ps.setString(1, uuid);
+                        ps.execute();
                         executeUpdate(ps, uuid);
                     }
                     return null;
@@ -101,12 +109,11 @@ public class SqlStorage implements Storage {
 
     @Override
     public int size() {
-        return sqlHelper.runSql("SELECT count(*) FROM resume", st -> {
-                    ResultSet rs = st.executeQuery();
-                    if (rs.next()) {
-                        return rs.getInt(1);
+        return sqlHelper.Execute(conn -> {
+                    try (PreparedStatement ps = conn.prepareStatement("SELECT count(*) FROM resume")) {
+                        ResultSet rs = ps.executeQuery();
+                        return rs.next() ? rs.getInt(1) : 0;
                     }
-                    return 0;
                 }
         );
     }
@@ -117,3 +124,4 @@ public class SqlStorage implements Storage {
         }
     }
 }
+
