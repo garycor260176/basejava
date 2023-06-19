@@ -29,8 +29,8 @@ public class ResumeTestData {
 
     public static Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
-        /*
         addContact(resume);
+        /*
         addTextSections(resume);
         addAchievements(resume);
         addQualifications(resume);
