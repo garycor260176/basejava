@@ -122,7 +122,7 @@ public class SqlStorage implements Storage {
                     addContact(rs, map.get(rs.getString("resume_uuid")));
                 }
             }
-            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM section")) {
+            try (PreparedStatement ps = conn.prepareStatement("SELECT * FROM section ORDER BY resume_uuid")) {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     addSection(rs, map.get(rs.getString("resume_uuid")));
