@@ -1,0 +1,67 @@
+section {
+    width: 900px;
+    margin: auto;
+}
+
+header {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+    text-align: center;
+}
+
+footer {
+    background: none repeat scroll 0 0 #A6C9E2;
+    color: #2E6E9E;
+    font-size: 20px;
+    padding: 5px 20px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+h2, h3 {
+    margin: 15px 0 5px;
+}
+
+a[href^="skype:"] {
+    padding-left: 20px !important;
+    background: url(../img/skype.png) no-repeat center left;
+}
+
+a[href^="mailto:"] {
+    padding-left: 20px !important;
+    background: url(../img/email.png) no-repeat center left;
+}
+
+a[href^="https://stackoverflow.com"] {
+    padding-left: 20px !important;
+    background: url(../img/so.png) no-repeat center left;
+}
+
+a[href^="https://www.linkedin.com"] {
+    padding-left: 20px !important;
+    background: url(../img/lin.png) no-repeat center left;
+}
+
+a[href*="github."] {
+    padding-left: 20px !important;
+    background: url(../img/gh.png) no-repeat center left;
+}
+
+.table{
+    border: 0;
+    width: 100%;
+    margin-bottom: 0;
+}
+.table th {
+    font-weight: bold;
+    padding: 5px;
+    background: #efefef;
+    border: 0;
+}
+.table td{
+    padding: 5px 10px;
+    border: 0;
+    text-align: left;
+}

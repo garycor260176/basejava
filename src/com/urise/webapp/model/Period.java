@@ -1,5 +1,6 @@
 package com.urise.webapp.model;
 
+import com.urise.webapp.util.DateUtil;
 import com.urise.webapp.util.LocalDateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -48,8 +49,16 @@ public class Period implements Serializable {
         return dateFrom;
     }
 
+    public String getDateFromFormat() {
+        return DateUtil.format(dateFrom);
+    }
+
     public LocalDate getDateTo() {
         return dateTo;
+    }
+
+    public String getDateToFormat() {
+        return DateUtil.format(dateTo);
     }
 
     public String getPosition() {

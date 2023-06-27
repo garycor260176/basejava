@@ -33,7 +33,7 @@ public class ResumeTestData {
         addTextSections(resume);
         addAchievements(resume);
         addQualifications(resume);
-//        addOrganizationSections(resume);
+        addOrganizationSections(resume);
         addEducationSections(resume);
         return resume;
     }

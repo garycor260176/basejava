@@ -74,6 +74,10 @@ public class Resume implements Comparable<Resume>, Serializable {
         return fullName;
     }
 
+    public void setFullName(String fullname) {
+        this.fullName = fullname;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,8 +86,7 @@ public class Resume implements Comparable<Resume>, Serializable {
         if (!Objects.equals(fullName, resume.fullName)) return false;
         if (!Objects.equals(uuid, resume.uuid)) return false;
         if (contacts != null ? !contacts.equals(resume.contacts) : resume.contacts != null) return false;
-        boolean f = sections != null ? sections.equals(resume.sections) : resume.sections == null;
-        return f;
+        return sections != null ? sections.equals(resume.sections) : resume.sections == null;
     }
 
     @Override
