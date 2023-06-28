@@ -21,7 +21,8 @@
             <tr>
                 <td><b>Имя:</b></td>
                 <td>
-                    <input type="text" style="width:100%" name="fullName" size=50 value="${resume.fullName}">
+                    <input id="fullName" type="text" style="width:100%" name="fullName" size=50 value="${resume.fullName}"
+                           pattern="^[А-Яа-яЁё\s]+$" required>
                 </td>
             </tr>
 
